@@ -57,8 +57,8 @@ books.get('/:id',(req,res)=>{
 })
 
 books.put('/:id',async (req,res)=>{
-try{
-    const updateBook = Book.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    try{
+    const updateBook = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true })
     res.json(updateBook)
 }catch(e){
     console.log(e)
@@ -68,7 +68,7 @@ try{
 
 books.post('/', async(req,res)=>{
     try{
-        const newBook = Book.create(req.body)
+        const newBook = await Book.create(req.body)
         res.json(newBook)
     }catch(e){
         console.log(e)
@@ -78,7 +78,7 @@ books.post('/', async(req,res)=>{
 
 books.delete('/:id', async(req,res)=>{
     try{
-        const deleteBook = Book.findByIdAndDelete(req.params.id)
+        const deleteBook = await Book.findByIdAndDelete(req.params.id)
         res.send('Book successfully deleted')
     }catch(e){
         console.log(e)
